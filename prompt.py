@@ -3,6 +3,8 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 
+# TODO TODO TODO Use tiktoken https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb to count tokens
+
 # This function will load the environment variables from the .env file
 load_dotenv()
 
