@@ -41,7 +41,7 @@ def main():
     for path in args.paths:
         if os.path.isdir(path) or (os.path.isfile(path) and not args.directories_only):
             if os.path.isfile(path):
-                print(f"{path}: {count_tokens_in_file(path)} tokens")
+                print(f"\t{path}: {count_tokens_in_file(path)} tokens")
             elif os.path.isdir(path):
                 print(f"{path}: {count_tokens_in_directory(path)} tokens")
         elif not os.path.exists(path):
