@@ -8,6 +8,11 @@ import os
 # This function will load the environment variables from the .env file
 load_dotenv()
 
+def get_tokens_in_text(text):
+    encoded = encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+    num_tokens = len(encoding.encode(text))
+    return num_tokens
+
 def get_api_key(env_var_name):
     """Get the OpenAI API key from environment variables."""
     return os.getenv(env_var_name)
