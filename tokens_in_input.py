@@ -1,7 +1,6 @@
 import tiktoken
-import openai
 import os
-import sys
+import argparse
 
 MODEL_NAME="gpt-3.5-turbo"
 CONTEXT_WINDOW=16385
@@ -20,7 +19,7 @@ def count_tokens_in_file(file_path):
         num_tokens = len(encoding.encode(content))
         return num_tokens
     except Exception as e:
-        print(f"Error processing file {file_path}: {e}")
+        print(f"\tError processing file {file_path}: {e}")
         return 0
 
 # Function to recursively count tokens in a directory
@@ -32,17 +31,21 @@ def count_tokens_in_directory(directory_path):
             token_count += count_tokens_in_file(file_path)
     return token_count
 
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python script_name.py <path1> <path2> ...")
-        sys.exit(1)
+def main():
+    parser = argparse.ArgumentParser(description='Token count for files and directories.')
+    parser.add_argument('paths', nargs='+', help='Paths to files and/or directories')
+    parser.add_argument('-d', '--directories-only', action='store_true', help='Operate on directories only')
+    
+    args = parser.parse_args()
 
-    print(f"Context window for {MODEL_NAME} is {CONTEXT_WINDOW}\n")
-    paths = sys.argv[1:]
-    for path in paths:
-        if os.path.isfile(path):
-            print(f"\t- {path}: {count_tokens_in_file(path)} tokens")
-        elif os.path.isdir(path):
-            print(f"{path}: {count_tokens_in_directory(path)} tokens")
-        else:
+    for path in args.paths:
+        if os.path.isdir(path) or (os.path.isfile(path) and not args.directories_only):
+            if os.path.isfile(path):
+                print(f"{path}: {count_tokens_in_file(path)} tokens")
+            elif os.path.isdir(path):
+                print(f"{path}: {count_tokens_in_directory(path)} tokens")
+        elif not os.path.exists(path):
             print(f"{path}: Path does not exist")
+
+if __name__ == "__main__":
+    main()
