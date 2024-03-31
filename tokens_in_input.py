@@ -35,17 +35,24 @@ def main():
     parser = argparse.ArgumentParser(description='Token count for files and directories.')
     parser.add_argument('paths', nargs='+', help='Paths to files and/or directories')
     parser.add_argument('-d', '--directories-only', action='store_true', help='Operate on directories only')
+    parser.add_argument('-f', '--files-only', action='store_true', help='Operate on files only')
     
     args = parser.parse_args()
 
     for path in args.paths:
-        if os.path.isdir(path) or (os.path.isfile(path) and not args.directories_only):
+        if args.directories_only:
+            if os.path.isdir(path):
+                print(f"{path}: {count_tokens_in_directory(path)} tokens")
+        elif args.files_only:
+            if os.path.isfile(path):
+                print(f"{path}: {count_tokens_in_file(path)} tokens")
+        elif not os.path.exists(path):
+            print(f"{path}: Path does not exist")
+        else:
             if os.path.isfile(path):
                 print(f"\t{path}: {count_tokens_in_file(path)} tokens")
             elif os.path.isdir(path):
                 print(f"{path}: {count_tokens_in_directory(path)} tokens")
-        elif not os.path.exists(path):
-            print(f"{path}: Path does not exist")
 
 if __name__ == "__main__":
     main()
