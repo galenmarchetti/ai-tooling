@@ -4,23 +4,35 @@ Some scripts to help people use chat-based LLMs, especially for coding help.
 
 ## Installation
 
-Just run ```pip install -r requirements.txt``` in the root of this repository to install the python requirements for these scripts.
+Just run 
+
+```pip install -r requirements.txt``` 
+
+in the root of this repository to install the python requirements for these scripts.
 
 ## Usage
 
 ### Concat Files
 
-```python concat_files.py <LIST_OF_FILES>``` will concatenate the relative paths and the contents of the files passed in. I use it like this:
+```python concat_files.py <LIST_OF_FILES>``` 
+
+will concatenate the relative paths and the contents of the files passed in. I use it like this:
 
 
-```python concat_files **/** | pbcopy``` so I can then paste the directory structure and the contents of the files into a chat interface.
+```python concat_files **/** | pbcopy``` 
+
+so I can then paste the directory structure and the contents of the files into a chat interface.
 
 ### Concat Git Files
 
-```python concat_git_files.py <LIST_OF_FILES>``` is used for files in a git directory, when you want to make sure you ignore all the files that are ignored by `.gitignore`. This behaves the same way as `concat_files` except for the caveat that you need to run it within a git directory. I use it like this:
+```python concat_git_files.py <LIST_OF_FILES>``` 
+
+is used for files in a git directory, when you want to make sure you ignore all the files that are ignored by `.gitignore`. This behaves the same way as `concat_files` except for the caveat that you need to run it within a git directory. I use it like this:
 
 
-```python concat_git_files **/** | pbcopy``` so I can then paste the directory structure and the contents of the files of a git repo into a chat interface, automatically ignoring things like build artifacts or sensitive information that is usually ignored by `.gitignore`.
+```python concat_git_files **/** | pbcopy``` 
+
+so I can then paste the directory structure and the contents of the files of a git repo into a chat interface, automatically ignoring things like build artifacts or sensitive information that is usually ignored by `.gitignore`.
 
 ### Tokens In Input
 
