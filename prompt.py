@@ -3,15 +3,10 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 
-# TODO TODO TODO Use tiktoken https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb to count tokens
-
 # This function will load the environment variables from the .env file
 load_dotenv()
 
-def get_tokens_in_text(text):
-    encoded = encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
-    num_tokens = len(encoding.encode(text))
-    return num_tokens
+MODEL_NAME = "gpt-4-0125-preview"
 
 def get_api_key(env_var_name):
     """Get the OpenAI API key from environment variables."""
@@ -24,7 +19,7 @@ async def send_prompt(client, prompt):
         "content": prompt
     }
     stream = await client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=MODEL_NAME,
         messages=[message],
         max_tokens=100,
         stream=True)

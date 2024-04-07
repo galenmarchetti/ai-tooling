@@ -2,8 +2,8 @@ import tiktoken
 import os
 import argparse
 
-MODEL_NAME="gpt-3.5-turbo"
-CONTEXT_WINDOW=16385
+MODEL_NAME="gpt-4-0125-preview"
+CONTEXT_WINDOW=128000
 
 def get_tokens_in_text(text):
     encoded = encoding = tiktoken.encoding_for_model(MODEL_NAME)
