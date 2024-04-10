@@ -2,11 +2,13 @@
 
 Some scripts to help people use chat-based LLMs, especially for coding help.
 
-## Installation
+##Installation
 
 Just run 
 
-```pip install -r requirements.txt``` 
+```bash
+pip install -r requirements.txt
+``` 
 
 in the root of this repository to install the python requirements for these scripts.
 
